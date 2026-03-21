@@ -125,8 +125,6 @@ class Employeecontroller extends GetxController {
     required String bankAccountNumber,
     required String notes,
     required int positionLevel,
-    File? profileImage,
-    File? qrcodeimage,
   }) async {
     try {
       isLoading.value = true;
@@ -158,8 +156,9 @@ class Employeecontroller extends GetxController {
         qrcodeimage: qrcodeimage,
       );
       if (isupdated) {
-        Get.back();
+       
         await fetchemployee();
+       
       }
     } catch (e) {
       CustomSnackbar.error(title: "ខុសប្រក្រី".tr, message: "កែប្រែបរាជ័យ".tr);

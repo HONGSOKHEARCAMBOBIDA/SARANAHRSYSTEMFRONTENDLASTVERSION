@@ -88,7 +88,6 @@ class Employeeservice {
   }) async {
     try {
       var formData = FormData.fromMap({
-        '_method': 'PUT',
         'branch_id': branchID,
         'name_en': nameEn,
         'name_kh': nameKh,
@@ -112,12 +111,12 @@ class Employeeservice {
         'notes': notes,
         'position_level': positionLevel,
         if (profileImage != null)
-          'profileimage': await MultipartFile.fromFile(
+          'profile_image': await MultipartFile.fromFile(
             profileImage.path,
             filename: profileImage.path.split('/').last,
           ),
         if (qrcodeimage != null)
-          'qrcodeimage': await MultipartFile.fromFile(
+          'qr_code_bank_account': await MultipartFile.fromFile(
             qrcodeimage.path,
             filename: qrcodeimage.path.split('/').last,
           ),
@@ -129,13 +128,17 @@ class Employeeservice {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
-        debugPrint(
-          'Update failed. Status: ${response.statusCode}, Data: ${response.data}',
-        );
+        CustomSnackbar.error(
+  title: "បញ្ហា",
+  message: response.data.toString(),
+);
         return false;
       }
     } catch (e) {
-      debugPrint('Unexpected error: ${e.toString()}');
+      CustomSnackbar.error(
+  title: "Error",
+  message: e.toString(),
+);
       return false;
     }
   }

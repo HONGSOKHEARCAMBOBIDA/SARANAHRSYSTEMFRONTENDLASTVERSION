@@ -200,12 +200,10 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
 
     // Set profile image URL
     if (employee.profileImage != null) {
-      profileImageUrl =
-          "${Appconstants.baseUrl}/profileimage/${employee.profileImage}";
+      profileImageUrl = "${Appconstants.baseUrl}/profileimage/${employee.profileImage}";
     }
     if (employee.qrCodeBankAccount != null) {
-      qrImageUrl =
-          "${Appconstants.baseUrl}/qrcodeimage/${employee.qrCodeBankAccount}";
+      qrImageUrl = "${Appconstants.baseUrl}/qrcodeimage/${employee.qrCodeBankAccount}";
     }
   }
 
@@ -271,7 +269,8 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
           selectvillageidofbirth.value == null ||
           selectroleid.value == null ||
           selecttype.value == null ||
-          selecthiredate.value == null) {
+          selecthiredate.value == null ) {
+            
         CustomSnackbar.error(
           title: "បញ្ចូលមិនពេញលេញ",
           message: "សូមបញ្ចូលព័ត៌មានឲ្យបានពេញលេញ!",
@@ -307,8 +306,6 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
           bankAccountNumber: bankaccountcontroller.text,
           notes: notecontroller.text,
           positionLevel: selectpositionlevel.value!,
-          profileImage: newProfileImage.value,
-          qrcodeimage: newQrImage.value, // You can add QR code logic if needed
         );
       } catch (e) {
         CustomSnackbar.error(
