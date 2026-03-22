@@ -93,6 +93,7 @@ class Authcontroller extends GetxController {
         is_active: is_active,
         name: name,
       );
+      users.clear();
       users.assignAll(result);
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());
@@ -249,12 +250,12 @@ class Authcontroller extends GetxController {
     }
   }
 
-  Future<void> changestatususer(int? id) async {
+  Future<void> changestatususer(int id) async {
     try {
       isLoading.value = true;
       bool update = await authservice.changestatus(id: id);
       if (update) {
-        await fetchUser();
+         fetchUser();
       }
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());

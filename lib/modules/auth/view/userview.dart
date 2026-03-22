@@ -276,7 +276,7 @@ class _UserviewState extends State<Userview> {
                                 );
                               },
                               onDelete: () {
-                                authcontroller.changestatususer(user.id);
+                                authcontroller.changestatususer(user.id!);
                               },
                               onTap: () => {
                                 _handleViewUser(user),

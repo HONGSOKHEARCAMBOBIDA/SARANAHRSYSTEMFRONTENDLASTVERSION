@@ -14,7 +14,7 @@ class a extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TheColors.bgColor,
-      appBar: CustomAppBar(title: "អ្នកប្រេីប្រាស់"),
+      appBar: CustomAppBar(title: "អ្នកកាន់ប្រព័ន្ធ"),
       drawer: Drawer(
         width: 250,
         backgroundColor: TheColors.bgColor,
@@ -39,7 +39,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(Icons.person, color: TheColors.warningColor),
               title: Text(
-                'អ្នកប្រេីប្រាស់',
+                'បញ្ជីអ្នកប្រេីប្រាស់',
                 style: TextStyles.siemreap(context, fontSize: 12,),
               ),
               onTap: () {

@@ -124,7 +124,6 @@ class Authservice {
   }) async {
     try {
       var formData = FormData.fromMap({
-        '_method': 'PUT',
         'branch_id': branchID,
         'name_en': nameEn,
         'name_kh': nameKh,
@@ -202,7 +201,7 @@ class Authservice {
     }
   }
 
-  Future<bool> changestatus({int? id}) async {
+  Future<bool> changestatus({required int id}) async {
     try {
       final response = await apiProvider.put('chnagestatususer/${id}', id);
       if (response.statusCode == 200) {
