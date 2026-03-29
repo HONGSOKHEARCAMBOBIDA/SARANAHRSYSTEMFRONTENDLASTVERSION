@@ -25,6 +25,8 @@ class Data {
   int? id;
   int? salaryId;
   int? employeeShiftId;
+  String? employee_profile;
+  String? qrcode;
   String? baseSalary;
   int? workedDay;
   String? dailyRate;
@@ -73,6 +75,8 @@ class Data {
       {this.id,
       this.salaryId,
       this.employeeShiftId,
+      this.employee_profile,
+      this.qrcode,
       this.baseSalary,
       this.workedDay,
       this.dailyRate,
@@ -122,6 +126,8 @@ class Data {
     id = json['id'];
     salaryId = json['salary_id'];
     employeeShiftId = json['employee_shift_id'];
+    employee_profile = json['profile_image'];
+    qrcode = json['qr_code_bank_account'];
     baseSalary = json['base_salary'];
     workedDay = json['worked_day'];
     dailyRate = json['daily_rate'];

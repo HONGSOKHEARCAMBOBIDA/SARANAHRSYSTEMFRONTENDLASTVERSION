@@ -257,6 +257,7 @@ void _openCheckOutLocation(String latitude, String longitude) {
                         return  Padding(
   padding: const EdgeInsets.symmetric(horizontal: 8.0),
   child: CustomAttendanceCard(
+    profile: attendnce.profile ?? '',
     nameKh: attendnce.nameKh ?? '',
     nameEn: attendnce.nameEn ?? '',
     role: attendnce.roleName ?? '',

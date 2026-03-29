@@ -16,6 +16,7 @@ import 'package:flutter_application_10/shared/widgets/textfield.dart';
 import 'package:flutter_application_10/shared/widgets/usercard.dart';
 import 'package:flutter_application_10/shared/widgets/userdetailbuttonsheet.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Userview extends StatefulWidget {
   Userview({super.key});
@@ -105,121 +106,84 @@ class _UserviewState extends State<Userview> {
                       ),
                     ),
                    // SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 11, right: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 3,
-                                ),
-                                minimumSize: Size(0, 0),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                side: BorderSide(
-                                  color: TheColors.errorColor,
-                                  width: 0.5,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              onPressed: () {
-                               
-                                showBranchSelectorSheet(
-                                  context: context,
-                                  branch: branchcontroller.branch,
-                                  selectedBranchId: selectbranchid.value,
-                                  onSelected: (id) {
-                                    setState(() {
-                                      selectbranchid.value = id;
-                                      authcontroller.fetchUser(
-                                        branchID: selectbranchid.value,
-                                      );
-                                    });
-                                  },
-                                );
-                              },
-                              child: _buildlabel("សាខា"),
-                            ),
-                          ),
-                          SizedBox(width: 3),
-                          Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 3,
-                                ),
-                                minimumSize: Size(0, 0),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                side: BorderSide(
-                                  color: TheColors.errorColor,
-                                  width: 0.5,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              onPressed: () {
-                                showRoleSelectorsheet(
-                                  context: context,
-                                  role: rolecontroller.role,
-                                  selectedSelectId: selectroleid.value,
-                                  onSelected: (id) {
-                                    setState(() {
-                                      selectroleid.value = id;
-                                      authcontroller.fetchUser(
-                                        roleId: selectroleid.value,
-                                      );
-                                    });
-                                  },
-                                );
-                              },
-                              child: _buildlabel("តួនាទី"),
-                            ),
-                          ),
-                          SizedBox(width: 3),
-                          Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 3,
-                                ),
-                                minimumSize: Size(0, 0),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                side: BorderSide(
-                                  color: TheColors.errorColor,
-                                  width: 0.5,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              onPressed: () {
-                                showIsActiveSelectorSheet(
-                                  context: context,
-                                  selectedValue: currentstate.value,
-                                  onSelected: (value) {
-                                    setState(() {
-                                      currentstate.value = value;
-                                      authcontroller.fetchUser(
-                                        is_active: currentstate.value!,
-                                      );
-                                    });
-                                  },
-                                );
-                              },
-                              child: _buildlabel("ស្ថានភាព"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.05),
+          blurRadius: 10,
+          offset: Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Row(
+      children: [
+        _buildModernFilterButton(
+          label: "សាខា",
+          icon: Icons.store_outlined,
+          onPressed: () {
+            showBranchSelectorSheet(
+              context: context,
+              branch: branchcontroller.branch,
+              selectedBranchId: selectbranchid.value,
+              onSelected: (id) {
+                setState(() {
+                  selectbranchid.value = id;
+                  authcontroller.fetchUser(
+                    branchID: selectbranchid.value,
+                  );
+                });
+              },
+            );
+          },
+        ),
+        _buildDivider(),
+        _buildModernFilterButton(
+          label: "តួនាទី",
+          icon: Icons.people_outline,
+          onPressed: () {
+            showRoleSelectorsheet(
+              context: context,
+              role: rolecontroller.role,
+              selectedSelectId: selectroleid.value,
+              onSelected: (id) {
+                setState(() {
+                  selectroleid.value = id;
+                  authcontroller.fetchUser(
+                    roleId: selectroleid.value,
+                  );
+                });
+              },
+            );
+          },
+        ),
+        _buildDivider(),
+        _buildModernFilterButton(
+          label: "ស្ថានភាព",
+          icon: Icons.toggle_on_outlined,
+          onPressed: () {
+            showIsActiveSelectorSheet(
+              context: context,
+              selectedValue: currentstate.value,
+              onSelected: (value) {
+                setState(() {
+                  currentstate.value = value;
+                  authcontroller.fetchUser(
+                    is_active: currentstate.value!,
+                  );
+                });
+              },
+            );
+          },
+        ),
+      ],
+    ),
+  ),
+),
                   ],
                 ),
               ),
@@ -261,7 +225,7 @@ class _UserviewState extends State<Userview> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8,bottom: 8),
+                            padding: const EdgeInsets.only(left: 8, right: 8,),
                             child: CustomUserCard(
                               namekh: user.name ?? "អត់មាន",
                               role: user.roleName ?? "អត់មាន".tr,
@@ -284,13 +248,7 @@ class _UserviewState extends State<Userview> {
                               }
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 82),
-                            child: Divider(
-                              color: TheColors.gray,
-                              thickness: 0.3,
-                            ),
-                          ),
+                        
                         ],
                       ),
                     );
@@ -303,4 +261,57 @@ class _UserviewState extends State<Userview> {
       ),
     );
   }
+}
+Widget _buildModernFilterButton({
+  required String label,
+  required IconData icon,
+  required VoidCallback onPressed,
+}) {
+  return Expanded(
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 18,
+                color: TheColors.errorColor.withOpacity(0.7),
+              ),
+              SizedBox(width: 8),
+              Text(
+                label,
+                style: GoogleFonts.siemreap(
+
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: TheColors.errorColor,
+                  letterSpacing: 0.3,
+                ),
+              ),
+              SizedBox(width: 4),
+              Icon(
+                Icons.arrow_drop_down,
+                size: 18,
+                color: TheColors.errorColor.withOpacity(0.6),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildDivider() {
+  return Container(
+    width: 1,
+    height: 30,
+    color: Colors.grey.withOpacity(0.2),
+  );
 }

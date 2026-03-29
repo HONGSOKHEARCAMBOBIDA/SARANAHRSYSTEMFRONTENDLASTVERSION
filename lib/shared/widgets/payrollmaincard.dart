@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_10/core/helper/format.dart';
+import 'package:flutter_application_10/core/theme/constants/constants.dart';
 import 'package:flutter_application_10/core/theme/constants/the_colors.dart';
 import 'package:flutter_application_10/data/models/payrollmodel.dart';
 import 'package:flutter_application_10/modules/payroll/payrollcontroller/payrollcontroller.dart';
@@ -91,64 +92,78 @@ class _PayrollmaincardState extends State<Payrollmaincard> {
          mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                widget.payrollData.nameKh ?? 'Unknown Employee',
-                style: GoogleFonts.siemreap(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: TheColors.secondaryColor,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.payrollData.nameKh ?? 'Unknown Employee',
+                    style: GoogleFonts.siemreap(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: TheColors.secondaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    widget.payrollData.roleName ?? 'No Role',
+                    style: GoogleFonts.siemreap(
+                      fontSize: 11,
+                      color: TheColors.orange,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 4),
-              Text(
-                widget.payrollData.roleName ?? 'No Role',
-                style: GoogleFonts.siemreap(
-                  fontSize: 11,
-                  color: TheColors.orange,
-                ),
-              ),
+              SizedBox(width: 8,),
+                   Container(
+  width: 100,
+  height: 100,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    border: Border.all(color: TheColors.yellow,width: 0.5),
+    color: TheColors.bgColor,
+    image: DecorationImage(
+      fit: BoxFit.cover,
+      image: widget.payrollData.employee_profile!.isNotEmpty
+          ? NetworkImage("${Appconstants.baseUrl}/profileimage/${widget.payrollData.employee_profile}")
+          : const NetworkImage(
+              'https://cdn-icons-png.flaticon.com/512/17634/17634775.png',
+            ),
+    ),
+  ),
+),
             ],
           ),
         ),
-    
+ SizedBox(width: 4,),
         // Net Salary Display
     Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-    FittedBox(
-      fit: BoxFit.scaleDown,
-      child: IntrinsicWidth(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            border: Border.all(color: TheColors.orange, width: 0.5),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Row(
-            children: [
-              Text(
-                widget.payrollData.netsalary.toString(),
-                style: GoogleFonts.siemreap(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: TheColors.errorColor,
-                ),
-              ),
-              const SizedBox(width: 5),
-              Text(
-                widget.payrollData.currencySymbol ?? '',
-                style: GoogleFonts.siemreap(
-                  fontSize: 16,
-                  color: TheColors.errorColor,
-                ),
-              ),
-            ],
-          ),
-        ),
+     Expanded(
+      child: Row(
+        children: [
+  
+    Container(
+  width: 100,
+  height: 100,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    border: Border.all(color: TheColors.yellow,width: 0.5),
+    color: TheColors.bgColor,
+    image: DecorationImage(
+      fit: BoxFit.cover,
+      image: widget.payrollData.qrcode!.isNotEmpty
+          ? NetworkImage("${Appconstants.baseUrl}/qrcodeimage/${widget.payrollData.qrcode}")
+          : const NetworkImage(
+              'https://cdn-icons-png.flaticon.com/512/17634/17634775.png',
+            ),
+    ),
+  ),
+),
+        ],
       ),
     ),
            GestureDetector(
@@ -159,6 +174,7 @@ class _PayrollmaincardState extends State<Payrollmaincard> {
         ],
       ),
     ),
+    
     
     
       ],

@@ -117,9 +117,8 @@ List<mymodel.Data> get filteredPermissions {
       isLoading.value = true;
       bool isupdated = await roleservice.updaterole(rolemodel);
       if (isupdated) {
+    
         await fetchrole();
-        Get.back(result: true);
-        CustomSnackbar.success(title: "ជោគជ័យ", message: "កែប្រែបានជោគជ័យ");
       }
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());

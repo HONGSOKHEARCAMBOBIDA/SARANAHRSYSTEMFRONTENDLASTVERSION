@@ -24,6 +24,7 @@ class AttendanceModel {
 class Data {
   int? id;
   int? employeeShiftId;
+  String? profile;
   String? checkDate;
   String? checkIn;
   String? checkOut;
@@ -52,6 +53,7 @@ class Data {
   Data(
       {this.id,
       this.employeeShiftId,
+      this.profile,
       this.checkDate,
       this.checkIn,
       this.checkOut,
@@ -80,6 +82,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeShiftId = json['employee_shift_id '];
+    profile = json['employee_profile'];
     checkDate = json['check_date'];
     checkIn = json['check_in'];
     checkOut = json['check_out'];

@@ -61,7 +61,7 @@ class CustomEmployeeCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(18.0),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        decoration: BoxDecoration(
+                          decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18,),
           border: Border.all(color: TheColors.orange,width: 0.5)
         ),

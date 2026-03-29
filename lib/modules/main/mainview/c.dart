@@ -88,7 +88,7 @@ class _cState extends State<c> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: TheColors.warningColor),
+              leading: const Icon(Icons.person, color: TheColors.yellow),
               title: Text(
                 'របាយការណ៍វត្តមាន',
                 style: TextStyles.siemreap(context, fontSize: 12),
@@ -100,7 +100,7 @@ class _cState extends State<c> {
             ListTile(
               leading: const Icon(
                 Icons.monetization_on,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'បុគ្គលិកខ្ចីលុយ',
@@ -114,7 +114,7 @@ class _cState extends State<c> {
             ListTile(
               leading: const Icon(
                 Icons.leave_bags_at_home,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'សុំច្បាប់',
@@ -128,7 +128,7 @@ class _cState extends State<c> {
             ListTile(
               leading: const Icon(
                 Icons.monetization_on_sharp,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'របាយការណ៍បេីកប្រាក់ខែ',

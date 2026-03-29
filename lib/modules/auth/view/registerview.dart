@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_10/core/helper/show_branch_buttonsheet.dart';
@@ -331,10 +332,10 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                                 return Container(
                                         decoration: BoxDecoration(
       border: Border.all(
-        color: TheColors.warningColor,// Border color
+        color: TheColors.orange,// Border color
         width: 0.9,
       ),
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(60),
     ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
@@ -351,7 +352,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                               style: ButtonStyle(
                                 side: MaterialStateProperty.all(
                                   BorderSide(
-                                    color: TheColors.warningColor,
+                                    color: TheColors.orange,
                                     width: 1,
                                   ),
                                 ),
@@ -385,13 +386,10 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
                       // Account Information Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -458,13 +456,10 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
                       // Personal Information Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -707,13 +702,10 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
                       // Work Information Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -759,7 +751,7 @@ Obx(() {
       _buildLabel("ផ្នែកដែលអាចមេីលបាន"),
   SingleChildScrollView(
     child: SizedBox(
-    height: 200,
+    height: 160,
     child: GetBuilder<Authcontroller>(
       builder: (authController) {
         return GridView.builder(
@@ -767,7 +759,7 @@ Obx(() {
             crossAxisCount: 2,
             mainAxisSpacing: 1,
             crossAxisSpacing: 1,
-            childAspectRatio: 3 / 2,
+            childAspectRatio: 3 / 1.2,
           ),
           itemCount: partcontroller.parts.length,
           itemBuilder: (context, index) {
@@ -1100,13 +1092,10 @@ Obx(() {
 
                       // Financial Information Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -1147,7 +1136,8 @@ Obx(() {
                                             child: Container(
                                               width: 120,
                                               height: 120,
-                                              color: TheColors.orange,
+                                              color: TheColors.yellow.withOpacity(0.1),
+                                             
                                               child: newQrImage.value == null
                                                   ? Icon(
                                                       Icons.qr_code,
@@ -1192,13 +1182,10 @@ Obx(() {
 
                       // Education and Experience Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -1327,13 +1314,10 @@ Obx(() {
 
                       // Birth Place Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
@@ -1556,13 +1540,10 @@ Obx(() {
 
                       // Current Address Section
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: TheColors.orange,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                                          decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18,),
+          border: Border.all(color: TheColors.orange,width: 0.5)
+        ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(

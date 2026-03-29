@@ -56,7 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ? IconButton(
                 icon: Icon(
                   _obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: TheColors.errorColor,
+                  color: TheColors.yellow,
                 ),
                 onPressed: () {
                  
@@ -74,7 +74,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: TheColors.gray,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(15),
           borderSide: const BorderSide(
             color: TheColors.orange,
             width: 0.5,
@@ -82,9 +82,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
 
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(15),
           borderSide: const BorderSide(
-            color: TheColors.warningColor,
+            color: TheColors.lightOrage,
             width: 0.5,
           ), // Primary Blue
         ),

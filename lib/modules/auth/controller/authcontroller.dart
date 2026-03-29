@@ -255,7 +255,7 @@ class Authcontroller extends GetxController {
       isLoading.value = true;
       bool update = await authservice.changestatus(id: id);
       if (update) {
-         fetchUser();
+        await fetchUser();
       }
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());

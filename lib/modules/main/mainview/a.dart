@@ -26,7 +26,7 @@ class a extends GetView<MainController> {
               height: 82,
               child: const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: TheColors.errorColor, // same as your app theme
+                  color: TheColors.yellow, // same as your app theme
                 ),
                 child: Center(
                   child: Text(
@@ -37,7 +37,7 @@ class a extends GetView<MainController> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: TheColors.warningColor),
+              leading: const Icon(Icons.person, color: TheColors.yellow),
               title: Text(
                 'បញ្ជីអ្នកប្រេីប្រាស់',
                 style: TextStyles.siemreap(context, fontSize: 12,),
@@ -51,7 +51,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.person_add,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'បង្កេីតអ្នកប្រេីប្រាស់',
@@ -65,7 +65,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.admin_panel_settings,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'តួនាទី',
@@ -83,7 +83,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.person_2_sharp,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'បុគ្គលិក',
@@ -95,7 +95,7 @@ class a extends GetView<MainController> {
             ),
        
             ListTile(
-              leading: const Icon(Icons.home_work, color: TheColors.warningColor),
+              leading: const Icon(Icons.home_work, color: TheColors.yellow),
               title: Text(
                 'សាខា',
                 style: TextStyles.siemreap(context, fontSize: 12),
@@ -108,7 +108,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.lock_clock,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'វេនធ្វេីការ',
@@ -122,7 +122,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.monetization_on,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'រូបិយប័ណ្ណ',
@@ -136,7 +136,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.monetization_on,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'ប្ដូរូបិយប័ណ្ណ',
@@ -150,7 +150,7 @@ class a extends GetView<MainController> {
             ListTile(
               leading: const Icon(
                 Icons.monetization_on,
-                color: TheColors.warningColor,
+                color: TheColors.yellow,
               ),
               title: Text(
                 'ការប្ដូរប្រាក់',

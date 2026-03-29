@@ -20,9 +20,9 @@ class CustomBottomNav extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Material(
-          color: TheColors.errorColor,
-          borderRadius: BorderRadius.circular(14),
-          elevation: 2, // optional subtle shadow
+          color: TheColors.yellow,
+          borderRadius: BorderRadius.circular(25),
+          shadowColor: Colors.transparent,
           child: InkWell(
             onTap: onTap != null
                 ? () async {

@@ -26,7 +26,7 @@ class CustomDatePickerField extends StatelessWidget {
                 context: context,
                 initialDate: selectedDate.value ?? DateTime.now(),
                 firstDate: DateTime(1900),
-                lastDate: DateTime(2026)
+                lastDate: DateTime(2030)
               );
               if (pickedDate != null) {
                 selectedDate.value = pickedDate;

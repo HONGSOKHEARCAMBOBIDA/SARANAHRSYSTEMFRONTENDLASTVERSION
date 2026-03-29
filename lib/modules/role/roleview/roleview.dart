@@ -96,13 +96,7 @@ class _RoleviewState extends State<Roleview> {
                                 },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 65),
-                              child: Divider(
-                                color: TheColors.gray,
-                                thickness: 0.3,
-                              ),
-                            ),
+                          
                           ],
                         ),
                       );
@@ -138,7 +132,7 @@ class _RoleviewState extends State<Roleview> {
     Get.bottomSheet(
       SingleChildScrollView(
         child: SizedBox(
-          height: Get.height * 0.55, // ✅ Fixed height
+          height: Get.height * 0.45, // ✅ Fixed height
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
@@ -155,11 +149,18 @@ class _RoleviewState extends State<Roleview> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 8),
                       padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.4),
-
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                         decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -247,7 +248,7 @@ class _RoleviewState extends State<Roleview> {
 
                         if (formkey.currentState!.validate()) {
                           await roleController.updaterole(role);
-                          Get.back(); // ✅ Close bottom sheet after update
+                          
                         }
                       },
                     ),

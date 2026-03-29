@@ -30,176 +30,253 @@ class CustomUserCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 13, top: 5, right: 2, bottom: 2),
-        child: Row(
-          children: [
-            // Profile avatar with status indicator
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: TheColors.errorColor, // Border color
-                        width: 0.9,
-                      ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Padding(
-  padding: const EdgeInsets.all(2.0),
-  child: Image.asset(
-    'assets/user/information.png',
-    width: 45,
-    height: 45,
-    fit: BoxFit.cover,
-  ),
-),
-
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      color: isActive == true
-                          ? TheColors.successColor
-                          : TheColors.red,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isDarkMode ? Colors.grey[850]! : Colors.white,
-                        width: 2,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Material(
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isDarkMode
+                    ? [
+                        Colors.grey[900]!,
+                        Colors.grey[850]!,
+                      ]
+                    : [
+                        Colors.white,
+                        Colors.grey[50]!,
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: isActive == true 
+                    ? TheColors.successColor.withOpacity(0.3)
+                    : TheColors.red.withOpacity(0.3),
+                width: 1,
+              ),
             ),
-            const SizedBox(width: 16),
-            // User info
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        namekh,
-                        style: TextStyles.siemreap(
-                          context,
-                          fontSize: 12,
-                          fontweight: FontWeight.bold,
-                        ),
-
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+            child: Row(
+              children: [
+                // Modern avatar with gradient border
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: isActive == true
+                          ? [TheColors.successColor, TheColors.successColor.withOpacity(0.7)]
+                          : [TheColors.red, TheColors.red.withOpacity(0.7)],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: (isActive == true ? TheColors.successColor : TheColors.red).withOpacity(0.3),
+                        blurRadius: 8,
+                        spreadRadius: 2,
                       ),
-                      SizedBox(width: 10),
-                      Text("("),
-                      SizedBox(width: 2),
-                      Text(
-                        branch,
-                        style: TextStyles.siemreap(
-                          context,
-                          fontSize: 10,
-                          color: TheColors.secondaryColor,
-                        ),
-
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(width: 2),
-                      Text(")"),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  Row(
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isDarkMode ? Colors.grey[800] : Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: Image.asset(
+                            'assets/user/information.png',
+                            width: 52,
+                            height: 52,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                // User info with modern typography
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              namekh,
+                              style: GoogleFonts.siemreap(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: isDarkMode ? Colors.white : Colors.grey[800],
+                                letterSpacing: -0.3,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: TheColors.secondaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              branch,
+                              style: GoogleFonts.siemreap(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: TheColors.secondaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      // Role with modern pill design
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: TheColors.orange.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: Text(
                           role,
                           style: GoogleFonts.siemreap(
-                            // 👈 Replace with your font
                             color: TheColors.orange,
                             fontSize: 10,
+                            fontWeight: FontWeight.w500,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(height: 4),
+                      // English name with subtle style
+                      Text(
+                        nameenglish,
+                        style: GoogleFonts.siemreap(
+                          fontSize: 11,
+                          color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                          fontWeight: FontWeight.w400,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                // Modern action menu
+                _buildModernActionMenu(context),
+              ],
             ),
-            // Action menu
-            _buildActionMenu(context),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildActionMenu(BuildContext context) {
+  Widget _buildModernActionMenu(BuildContext context) {
     final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
 
-    return PopupMenuButton<String>(
-      icon: Icon(
-        Icons.more_vert,
-        color: theme.iconTheme.color?.withOpacity(0.7),
+    return Container(
+      decoration: BoxDecoration(
+        color: isDarkMode ? Colors.grey[800] : Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.zero,
-      color: TheColors.bgColor,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: TheColors.orange, width: 1),
+      child: PopupMenuButton<String>(
+        icon: Icon(
+          Icons.more_horiz,
+          color: theme.iconTheme.color?.withOpacity(0.7),
+          size: 20,
+        ),
+        padding: EdgeInsets.zero,
+        color: isDarkMode ? Colors.grey[850] : Colors.white,
+        elevation: 8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        offset: const Offset(0, 40),
+        onSelected: (value) {
+          if (value == 'edit') {
+            onEdit();
+          } else if (value == 'delete') {
+            onDelete();
+          }
+        },
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 'edit',
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: TheColors.orange.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(Icons.edit, color: TheColors.orange, size: 18),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'កែប្រែ',
+                  style: GoogleFonts.siemreap(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: isDarkMode ? Colors.white : Colors.grey[800],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          PopupMenuItem(
+            value: 'delete',
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: (isActive == true 
+                        ? TheColors.errorColor 
+                        : TheColors.successColor).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    isActive == true ? Icons.person_remove : Icons.person_add,
+                    color: isActive == true
+                        ? TheColors.errorColor
+                        : TheColors.successColor,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  isActive == true ? 'បិទគណនី' : 'បើកគណនី',
+                  style: GoogleFonts.siemreap(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: isActive == true
+                        ? TheColors.errorColor
+                        : TheColors.successColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      onSelected: (value) {
-        if (value == 'edit') {
-          onEdit();
-        } else if (value == 'delete') {
-          onDelete();
-        }
-      },
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              Icon(Icons.edit, color: TheColors.orange, size: 20),
-              const SizedBox(width: 12),
-              Text('កែប្រែ', style: TextStyles.siemreap(context, fontSize: 12)),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(
-                isActive == true ? Icons.block : Icons.check_circle,
-                color: isActive == true
-                    ? TheColors.errorColor
-                    : TheColors.successColor,
-                size: 20,
-              ),
-              const SizedBox(width: 12),
-              Text(
-                isActive == true ? 'បិទ' : 'បើក',
-                style: TextStyles.siemreap(context, fontSize: 12),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

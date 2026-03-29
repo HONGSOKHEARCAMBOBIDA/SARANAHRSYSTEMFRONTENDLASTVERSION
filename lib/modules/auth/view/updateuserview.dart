@@ -174,10 +174,18 @@ class _UpdateuserviewState extends State<Updateuserview> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8,right: 8),
                 child: Container(
-                   decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: Column(
@@ -232,7 +240,7 @@ class _UpdateuserviewState extends State<Updateuserview> {
       _buildLabel("ផ្នែកដែលអាចមេីលបាន"),
   SingleChildScrollView(
     child: SizedBox(
-    height: 200,
+    height: 165,
     child: GetBuilder<Authcontroller>(
       builder: (authController) {
         return GridView.builder(
@@ -240,7 +248,7 @@ class _UpdateuserviewState extends State<Updateuserview> {
             crossAxisCount: 2,
             mainAxisSpacing: 1,
             crossAxisSpacing: 1,
-            childAspectRatio: 3 / 2,
+            childAspectRatio: 3 / 1.2,
           ),
           itemCount: partcontroller.parts.length,
           itemBuilder: (context, index) {

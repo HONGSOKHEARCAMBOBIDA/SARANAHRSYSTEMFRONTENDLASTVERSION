@@ -278,12 +278,18 @@ class _EmployeedetailbuttonsheetState extends State<Employeedetailbuttonsheet> {
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        border: Border.all(color: TheColors.orange,width: 0.4),
-        
-        borderRadius: BorderRadius.circular(12),
-       
-      ),
+                                decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

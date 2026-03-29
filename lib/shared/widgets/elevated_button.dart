@@ -17,12 +17,12 @@ class CustomElevatedButton extends StatelessWidget {
     Key? key,
     required this.text,
     this.onPressed,
-    this.backgroundColor = TheColors.errorColor,
+    this.backgroundColor = TheColors.yellow,
     this.textColor = TheColors.bgColor,
-    this.borderRadius = 14,
+    this.borderRadius = 25,
     this.fontSize = 16.0,
     this.width = double.infinity,
-    this.height = 50.0,
+    this.height = 55.0,
     this.icon,
   }) : super(key: key);
 
@@ -33,12 +33,15 @@ class CustomElevatedButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          elevation: 0,
+          shadowColor: Colors.transparent,
           backgroundColor: backgroundColor,
           foregroundColor: textColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          
         ),
         onPressed: onPressed,
         child: Row(

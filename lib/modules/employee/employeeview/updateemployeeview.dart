@@ -439,10 +439,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
 
                     SizedBox(height: 20),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                              decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -682,10 +690,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                     ),
                     SizedBox(height: 15),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                              decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -983,10 +999,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                     ),
                     SizedBox(height: 15),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                              decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -1064,10 +1088,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                     ),
                     SizedBox(height: 15),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                              decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -1132,10 +1164,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                     ),
                      SizedBox(height: 15),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                              decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -1342,10 +1382,18 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                     ),
                     SizedBox(height: 15,),
                     Container(
-                         decoration: BoxDecoration(
-                        border: Border.all(color: TheColors.orange, width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                                                 decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [
+        TheColors.orange.withOpacity(0.1),
+        TheColors.orange.withOpacity(0.1),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+ 
+    borderRadius: BorderRadius.circular(25),
+  ),
 
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),

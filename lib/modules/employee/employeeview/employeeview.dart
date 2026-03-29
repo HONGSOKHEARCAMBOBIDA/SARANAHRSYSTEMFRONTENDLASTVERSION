@@ -135,152 +135,149 @@ class _EmployeeviewState extends State<Employeeview> {
                               ),
                             ),
                             SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 11, right: 11),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 3,
-                                        ),
-                                        minimumSize: Size(0, 0),
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        side: BorderSide(
-                                          color: TheColors.errorColor,
-                                          width: 0.5,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 3,
                                       ),
-                                      onPressed: () {
-                                        showBranchSelectorSheet(
-                                          context: context,
-                                          branch: branchcontroller.branch,
-                                          selectedBranchId: selectbranchid.value,
-                                          onSelected: (id) {
-                                            setState(() {
-                                              selectbranchid.value = id;
-                                              employeecontroller.fetchemployee(
-                                                branchid: selectbranchid.value,
-                                              );
-                                              shiftcontroller.fetchshift(
-                                                selectbranchid.value,
-                                              );
-                                            });
-                                          },
-                                        );
-                                      },
-                                      child: _buildlabel("សាខា"),
-                                    ),
-                                    SizedBox(width: 3),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 3,
-                                        ),
-                                        minimumSize: Size(0, 0),
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        side: BorderSide(
-                                          color: TheColors.errorColor,
-                                          width: 0.5,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
+                                      minimumSize: Size(0, 0),
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      side: BorderSide(
+                                        color: TheColors.errorColor,
+                                        width: 0.5,
                                       ),
-                                      onPressed: () {
-                                        showRoleSelectorsheet(
-                                          context: context,
-                                          role: rolecontroller.role,
-                                          selectedSelectId: selectroleid.value,
-                                          onSelected: (id) {
-                                            setState(() {
-                                              selectroleid.value = id;
-                                              employeecontroller.fetchemployee(
-                                                roleid: selectroleid.value,
-                                              );
-                                            });
-                                          },
-                                        );
-                                      },
-                                      child: _buildlabel("តួនាទី"),
-                                    ),
-                                    SizedBox(width: 3),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 3,
-                                        ),
-                                        minimumSize: Size(0, 0),
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        side: BorderSide(
-                                          color: TheColors.errorColor,
-                                          width: 0.5,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      onPressed: () {
-                                        showIsActiveSelectorSheet(
-                                          context: context,
-                                          selectedValue: currentstate.value,
-                                          onSelected: (value) {
-                                            setState(() {
-                                              currentstate.value = value;
-                                              employeecontroller.fetchemployee(
-                                                isActive: currentstate.value!,
-                                              );
-                                            });
-                                          },
-                                        );
-                                      },
-                                      child: _buildlabel("ស្ថានភាព"),
                                     ),
-                                    SizedBox(width: 3),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 3,
-                                        ),
-                                        minimumSize: Size(0, 0),
-                                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        side: BorderSide(
-                                          color: TheColors.errorColor,
-                                          width: 0.5,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
+                                    onPressed: () {
+                                      showBranchSelectorSheet(
+                                        context: context,
+                                        branch: branchcontroller.branch,
+                                        selectedBranchId: selectbranchid.value,
+                                        onSelected: (id) {
+                                          setState(() {
+                                            selectbranchid.value = id;
+                                            employeecontroller.fetchemployee(
+                                              branchid: selectbranchid.value,
+                                            );
+                                            shiftcontroller.fetchshift(
+                                              selectbranchid.value,
+                                            );
+                                          });
+                                        },
+                                      );
+                                    },
+                                    child: _buildlabel("សាខា"),
+                                  ),
+                                  SizedBox(width: 3),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 3,
                                       ),
-                                      onPressed: () {
-                                        showshiftbuttonsheet(
-                                          context: context,
-                                          shift: shiftcontroller.shift,
-                                          selectedShiftId: selectshiftid.value,
-                                          onSelected: (id) {
-                                            setState(() {
-                                              selectshiftid.value = id;
-                                              employeecontroller.fetchemployee(
-                                                shiftid: selectshiftid.value,
-                                              );
-                                            });
-                                          },
-                                        );
-                                      },
-                                      child: _buildlabel("វេនការងារ"),
+                                      minimumSize: Size(0, 0),
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      side: BorderSide(
+                                        color: TheColors.errorColor,
+                                        width: 0.5,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                    onPressed: () {
+                                      showRoleSelectorsheet(
+                                        context: context,
+                                        role: rolecontroller.role,
+                                        selectedSelectId: selectroleid.value,
+                                        onSelected: (id) {
+                                          setState(() {
+                                            selectroleid.value = id;
+                                            employeecontroller.fetchemployee(
+                                              roleid: selectroleid.value,
+                                            );
+                                          });
+                                        },
+                                      );
+                                    },
+                                    child: _buildlabel("តួនាទី"),
+                                  ),
+                                  SizedBox(width: 3),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 3,
+                                      ),
+                                      minimumSize: Size(0, 0),
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      side: BorderSide(
+                                        color: TheColors.errorColor,
+                                        width: 0.5,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      showIsActiveSelectorSheet(
+                                        context: context,
+                                        selectedValue: currentstate.value,
+                                        onSelected: (value) {
+                                          setState(() {
+                                            currentstate.value = value;
+                                            employeecontroller.fetchemployee(
+                                              isActive: currentstate.value!,
+                                            );
+                                          });
+                                        },
+                                      );
+                                    },
+                                    child: _buildlabel("ស្ថានភាព"),
+                                  ),
+                                  SizedBox(width: 3),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 3,
+                                      ),
+                                      minimumSize: Size(0, 0),
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      side: BorderSide(
+                                        color: TheColors.errorColor,
+                                        width: 0.5,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      showshiftbuttonsheet(
+                                        context: context,
+                                        shift: shiftcontroller.shift,
+                                        selectedShiftId: selectshiftid.value,
+                                        onSelected: (id) {
+                                          setState(() {
+                                            selectshiftid.value = id;
+                                            employeecontroller.fetchemployee(
+                                              shiftid: selectshiftid.value,
+                                            );
+                                          });
+                                        },
+                                      );
+                                    },
+                                    child: _buildlabel("វេនការងារ"),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
