@@ -107,7 +107,6 @@ class _UpdateuserviewState extends State<Updateuserview> {
       try {
       //  print(user.toJson());
         await authcontroller.updateuser(user.ID,user);
-        Get.back(); // Navigate back after successful update
       } catch (e) {
         CustomSnackbar.error(
           title: "កំហុស",

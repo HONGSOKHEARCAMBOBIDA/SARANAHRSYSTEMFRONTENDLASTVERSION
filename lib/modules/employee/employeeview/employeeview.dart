@@ -5,12 +5,7 @@ import 'package:flutter_application_10/core/helper/show_role_buttonsheet.dart';
 import 'package:flutter_application_10/core/helper/show_shitf_buttonsheet.dart';
 import 'package:flutter_application_10/core/theme/constants/the_colors.dart';
 import 'package:flutter_application_10/core/theme/custom_theme/text_styles.dart';
-import 'package:flutter_application_10/data/models/employeemodel.dart'
-    as myModel;
-
-import 'package:flutter_application_10/modules/auth/binding/updateuserbinding.dart';
-import 'package:flutter_application_10/modules/auth/controller/authcontroller.dart';
-import 'package:flutter_application_10/modules/auth/view/updateuserview.dart';
+import 'package:flutter_application_10/data/models/employeemodel.dart' as myModel;
 import 'package:flutter_application_10/modules/branch/branchcontroller/branchcontroller.dart';
 import 'package:flutter_application_10/modules/employee/employeebinding/updateemployeebinding.dart';
 import 'package:flutter_application_10/modules/employee/employeecontroller/employeecontroller.dart';
@@ -25,8 +20,6 @@ import 'package:flutter_application_10/shared/widgets/employeedetailbuttonsheet.
 import 'package:flutter_application_10/shared/widgets/employeeshifteditview.dart';
 import 'package:flutter_application_10/shared/widgets/loading.dart';
 import 'package:flutter_application_10/shared/widgets/textfield.dart';
-import 'package:flutter_application_10/shared/widgets/usercard.dart';
-import 'package:flutter_application_10/shared/widgets/userdetailbuttonsheet.dart';
 import 'package:get/get.dart';
 
 class Employeeview extends StatefulWidget {

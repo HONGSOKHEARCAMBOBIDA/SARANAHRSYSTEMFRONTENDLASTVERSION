@@ -188,74 +188,57 @@ class _UserviewState extends State<Userview> {
                 ),
               ),
             ),
-            SliverFillRemaining(
-              child: Obx(() {
-                if (authcontroller.isLoading.value) {
-                  return const CustomLoading();
-                }
-          
-                if (authcontroller.users.isEmpty) {
-                  // Always return a scrollable widget, even when empty
-                  return LayoutBuilder(
-                    builder: (context, constraints) {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: constraints.maxHeight,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'អត់ទាន់មានអ្នកប្រេីប្រាស់',
-                              style: TextStyles.siemreap(context, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+            Obx(() {
+              if(authcontroller.isLoading.value){
+                return SliverFillRemaining(
+                    child: Center(
+                      child: const CustomLoading(),
+                    ),
+                  );
+              }
+                           if (authcontroller.users.isEmpty) {
+                  return SliverFillRemaining(
+                    child: Center(
+                      child: Text(
+                        'អត់ទាន់មានទិន្ន័យ',
+                        style: TextStyles.siemreap(context, fontSize: 12),
+                      ),
+                    ),
                   );
                 }
-          
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: authcontroller.users.length,
-                  itemBuilder: (context, index) {
-                    final user = authcontroller.users[index];
-                    return Center(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8,),
-                            child: CustomUserCard(
-                              namekh: user.name ?? "អត់មាន",
-                              role: user.roleName ?? "អត់មាន".tr,
-                              branch: user.branchName!,
-                              nameenglish: user.nameEn ?? "",
-                              isActive: user.isActive,
-                              onEdit: () {
-                                Get.to(
-                                  () => Updateuserview(userModel: user),
-                                  transition: Transition.rightToLeft,
-                                  binding: UpdateUserBindings(),
-                                );
-                              },
-                              onDelete: () {
-                                authcontroller.changestatususer(user.id!);
-                              },
-                              onTap: () => {
-                                _handleViewUser(user),
-                                 
-                              }
-                            ),
-                          ),
-                        
-                        ],
-                      ),
-                    );
-                  },
-                );
-              }),
-            ),
+            
+                      
+              return SliverList(
+  delegate: SliverChildBuilderDelegate(
+    (context, index) {
+      final user = authcontroller.users[index];
+      return Center(
+        child: CustomUserCard(
+          namekh: user.name ?? "អត់មាន",
+          role: user.roleName ?? "អត់មាន".tr,
+          branch: user.branchName!,
+          nameenglish: user.nameEn ?? "",
+          isActive: user.isActive,
+          onEdit: () {
+            Get.to(
+              () => Updateuserview(userModel: user),
+              transition: Transition.rightToLeft,
+              binding: UpdateUserBindings(),
+            );
+          },
+          onDelete: () {
+            authcontroller.changestatususer(user.id!);
+          },
+          onTap: () {
+            _handleViewUser(user);
+          },
+        ),
+      );
+    },
+    childCount: authcontroller.users.length,
+  ),
+);
+            }),
           ],
         ),
       ),

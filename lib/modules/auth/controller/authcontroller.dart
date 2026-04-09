@@ -240,7 +240,7 @@ class Authcontroller extends GetxController {
       bool isupdated = await authservice.updateuser(userId,user);
       if (isupdated) {
         await fetchUser();
-        Get.back(result: true);
+        Get.back();
         CustomSnackbar.success(title: "ជោគជ័យ", message: "កែប្រែបានជោគជ័យ");
       }
     } catch (e) {

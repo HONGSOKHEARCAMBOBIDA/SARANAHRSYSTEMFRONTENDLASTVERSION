@@ -397,7 +397,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                             children: [
                               _buildHeader("ព័ត៌មានគណនី", Icons.lock_outline),
                               SizedBox(height: 8),
-                              _buildLabel("ឈ្មោះអ្នកប្រើប្រាស់"),
+                              _buildLabel("ឈ្មោះអ្នកប្រើប្រាស់សម្រាប់ចូលប្រព័ន្ធ"),
                               CustomTextField(
                                 controller: usernameController,
                                 hintText: "hong.sokhear",

@@ -184,13 +184,11 @@ class Authservice {
 
   Future<bool> updateuser(int userId,Userupdatemodel user) async {
     try {
-      
-      
       final response = await apiProvider.put(
         'updateuser/$userId',
         user.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
         CustomSnackbar.error(title: "បរាជ័យ", message: "កែប្រែមិនបានទេ");

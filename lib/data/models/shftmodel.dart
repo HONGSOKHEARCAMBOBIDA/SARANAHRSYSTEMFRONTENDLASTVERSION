@@ -40,7 +40,8 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = json['name'] ;
+    //+ ": " + json['start_time'] + " - " + json['end_time']
     startTime = json['start_time'];
     endTime = json['end_time'];
     branchId = json['branch_id'];
