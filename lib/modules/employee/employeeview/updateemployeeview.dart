@@ -307,6 +307,7 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
           notes: notecontroller.text,
           positionLevel: selectpositionlevel.value!,
         );
+        Navigator.pop(context);
       } catch (e) {
         CustomSnackbar.error(
           title: "កំហុស",

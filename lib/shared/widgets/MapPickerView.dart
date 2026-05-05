@@ -13,6 +13,11 @@ class MapPickerController extends GetxController {
   var longitude = RxnDouble();
   var isLoading = false.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getCurrentLocation(); // ✅ Call once here, not in build()
+  }
   Future<void> getCurrentLocation() async {
     isLoading.value = true;
 
@@ -46,20 +51,18 @@ class MapPickerController extends GetxController {
 class MapPickerView extends StatelessWidget {
   MapPickerView({Key? key}) : super(key: key);
 
-  final controller = Get.put(MapPickerController());
+  // Use tag + delete on close to force fresh instance each time
+  final controller = Get.put(MapPickerController(), tag: 'mapPicker');
 
   @override
   Widget build(BuildContext context) {
-    // Fetch location when the view opens
-    controller.getCurrentLocation();
-
     return Scaffold(
       backgroundColor: TheColors.bgColor,
       appBar: CustomAppBar(title: "ជ្រើសទីតាំងសាខា"),
       body: Center(
         child: Obx(() {
           if (controller.isLoading.value) {
-            return CustomLoading();
+            return const CustomLoading();
           }
 
           if (controller.latitude.value == null || controller.longitude.value == null) {
@@ -80,20 +83,22 @@ class MapPickerView extends StatelessWidget {
                 "Longitude: ${controller.longitude.value}",
                 style: TextStyles.siemreap(context, fontSize: 12),
               ),
-          
             ],
           );
         }),
       ),
       bottomNavigationBar: CustomBottomNav(
         title: "ជ្រើសទីតាំងនេះ",
-        onTap: ()async{
-          Get.back(result: {
-                    'lat': controller.latitude.value,
-                    'lng': controller.longitude.value,
-                  });
+        onTap: () async{
+          final lat = controller.latitude.value;
+          final lng = controller.longitude.value;
+
+          // Clean up before going back
+          Get.delete<MapPickerController>(tag: 'mapPicker');
+
+          Get.back(result: {'lat': lat, 'lng': lng});
         },
-        ),
+      ),
     );
   }
 }

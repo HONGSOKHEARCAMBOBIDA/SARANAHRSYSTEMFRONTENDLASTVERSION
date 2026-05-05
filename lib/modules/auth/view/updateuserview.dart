@@ -81,40 +81,31 @@ class _UpdateuserviewState extends State<Updateuserview> {
     partcontroller.fetchpart();
   }
 
-  Future<void> _updateUser() async {
-    if (_formkey.currentState!.validate()) {
-      if (selectbranchid.value == null || selectroleid.value == null) {
-        CustomSnackbar.error(
-          title: "បញ្ចូលមិនពេញលេញ",
-          message: "សូមបញ្ចូលព័ត៌មានឲ្យបានពេញលេញ!",
-        );
-        return;
-      }
-
-      final user = Userupdatemodel(
-        ID: widget.userModel.id, // Make sure to include the user ID
-        branchID: selectbranchid.value!,
-
-        username: usernamecontroller.text.trim(),
-        email: emailcontroller.text.trim(),
-
-        contact: contactcontroller.text.trim(),
-
-        roleId: selectroleid.value!,
-        partIds: authcontroller.selectedPartIds.toList(), 
+// In updateuserview.dart - remove Get.back() from here
+Future<void> _updateUser() async {
+  if (_formkey.currentState!.validate()) {
+    if (selectbranchid.value == null || selectroleid.value == null) {
+      CustomSnackbar.error(
+        title: "បញ្ចូលមិនពេញលេញ",
+        message: "សូមបញ្ចូលព័ត៌មានឲ្យបានពេញលេញ!",
       );
-
-      try {
-      //  print(user.toJson());
-        await authcontroller.updateuser(user.ID,user);
-      } catch (e) {
-        CustomSnackbar.error(
-          title: "កំហុស",
-          message: "មិនអាចកែប្រែព័ត៌មានបាន: $e",
-        );
-      }
+      return;
     }
+
+    final user = Userupdatemodel(
+      ID: widget.userModel.id,
+      branchID: selectbranchid.value!,
+      username: usernamecontroller.text.trim(),
+      email: emailcontroller.text.trim(),
+      contact: contactcontroller.text.trim(),
+      roleId: selectroleid.value!,
+      partIds: authcontroller.selectedPartIds.toList(),
+    );
+
+    await authcontroller.updateuser(user.ID, user);
+   Navigator.pop(context);
   }
+}
 
   Widget _buildLabel(String label) {
     return Padding(

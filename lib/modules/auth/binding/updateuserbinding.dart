@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 class UpdateUserBindings extends Bindings {
   @override
   void dependencies() {
-    Authbinding().dependencies();
-    Authbinding().dependencies();
     Provincebinding().dependencies();
     Districtbinding().dependencies();
     Communcebinding().dependencies();

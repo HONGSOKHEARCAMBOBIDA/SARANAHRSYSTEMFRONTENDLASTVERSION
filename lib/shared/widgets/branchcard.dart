@@ -219,9 +219,9 @@ class CustomBranchcard extends StatelessWidget {
   }
 
   void _confirmDelete(BuildContext context) {
-    final actionText = isActive == true ? 'បិទ' : 'បើក';
+    final actionText = isActive == 1 ? 'បិទ' : 'បើក';
     final confirmMessage =
-        isActive == true ? 'តើអ្នកពិតជាចង់បិទសាខានេះមែនទេ?' : 'តើអ្នកពិតជាចង់បើកសាខានេះមែនទេ?';
+        isActive == 1 ? 'តើអ្នកពិតជាចង់បិទសាខានេះមែនទេ?' : 'តើអ្នកពិតជាចង់បើកសាខានេះមែនទេ?';
 
     showDialog(
       
@@ -232,13 +232,13 @@ class CustomBranchcard extends StatelessWidget {
         content: Text(confirmMessage, style: GoogleFonts.siemreap()),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Get.back(),
             child: Text('បោះបង់', style: GoogleFonts.siemreap()),
           ),
           TextButton(
             onPressed: () {
               onDelete();
-              Get.back();
+             // Get.back();
             },
             child: Text(actionText, style: GoogleFonts.siemreap()),
           ),

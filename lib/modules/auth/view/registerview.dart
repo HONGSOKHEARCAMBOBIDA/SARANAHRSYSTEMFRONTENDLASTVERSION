@@ -225,7 +225,9 @@ class _RegisterUserViewState extends State<RegisterUserView> {
           positionLevel: selectpositionlevel.value ?? 1,
           // profileImage: newProfileImage.value,
           // qrcodeimage: newQrImage.value,
+          
         );
+        //Navigator.pop(context);
       } catch (e) {
         CustomSnackbar.error(title: "កំហុស", message: "មិនអាចចុះឈ្មោះបាន: $e");
       }

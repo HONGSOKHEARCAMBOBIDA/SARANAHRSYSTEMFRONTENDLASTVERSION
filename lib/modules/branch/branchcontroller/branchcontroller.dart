@@ -44,7 +44,7 @@ class Branchcontroller extends GetxController {
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());
     } finally {
-      isLoading.value = true;
+      isLoading.value = false;
     }
   }
 
@@ -82,6 +82,7 @@ class Branchcontroller extends GetxController {
       bool updated = await branchservice.changestatusbranch(branchid: branchid);
       if (updated) {
         await fetchbranch();
+        Get.back();
       }
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());

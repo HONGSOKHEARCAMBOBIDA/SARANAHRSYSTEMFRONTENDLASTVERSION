@@ -234,21 +234,23 @@ class Authcontroller extends GetxController {
     }
   }
 
-  Future<void> updateuser(int userId,Userupdatemodel user) async {
-    try {
-      isLoading.value = true;
-      bool isupdated = await authservice.updateuser(userId,user);
-      if (isupdated) {
-        await fetchUser();
-        Get.back();
-        CustomSnackbar.success(title: "ជោគជ័យ", message: "កែប្រែបានជោគជ័យ");
-      }
-    } catch (e) {
-      CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());
-    } finally {
-      isLoading.value = false;
+// In authcontroller.dart
+Future<void> updateuser(int userId, Userupdatemodel user) async {
+  try {
+    isLoading.value = true;
+    bool isupdated = await authservice.updateuser(userId, user);
+    if (isupdated) {
+      await fetchUser();
+      CustomSnackbar.success(title: "ជោគជ័យ", message: "កែប្រែបានជោគជ័យ");
+      await Future.delayed(const Duration(milliseconds: 300)); // 👈 wait for snackbar
+     
     }
+  } catch (e) {
+    CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());
+  } finally {
+    isLoading.value = false;
   }
+}
 
   Future<void> changestatususer(int id) async {
     try {

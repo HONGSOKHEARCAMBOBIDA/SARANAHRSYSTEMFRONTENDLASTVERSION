@@ -3,20 +3,14 @@ import 'package:flutter_application_10/core/theme/constants/the_colors.dart';
 import 'package:flutter_application_10/core/theme/custom_theme/text_styles.dart';
 import 'package:flutter_application_10/data/models/branchmodel.dart';
 import 'package:flutter_application_10/modules/branch/branchcontroller/branchcontroller.dart';
-import 'package:flutter_application_10/modules/role/rolebinding/rolebinding.dart';
-import 'package:flutter_application_10/modules/role/rolecontroller/rolecontroller.dart';
-import 'package:flutter_application_10/modules/role/roleview/createroleview.dart';
-import 'package:flutter_application_10/modules/role/roleview/roleassignpermissionview.dart';
-import 'package:flutter_application_10/modules/role/roleview/rolepermissionfordelete.dart';
 import 'package:flutter_application_10/shared/widgets/MapPickerView.dart';
 import 'package:flutter_application_10/shared/widgets/app_bar.dart';
 import 'package:flutter_application_10/shared/widgets/branchcard.dart';
-import 'package:flutter_application_10/shared/widgets/custombuttonnav.dart';
-import 'package:flutter_application_10/shared/widgets/customrolecard.dart';
 import 'package:flutter_application_10/shared/widgets/elevated_button.dart';
 import 'package:flutter_application_10/shared/widgets/floating_buttom.dart';
 import 'package:flutter_application_10/shared/widgets/loading.dart';
 import 'package:flutter_application_10/shared/widgets/textfield.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class Branchview extends StatefulWidget {
@@ -266,19 +260,19 @@ void showUpdateBranchBottomSheet(Data branch) {
     isScrollControlled: true,
   );
 }
+
 void showCreateBranchBottomSheet() {
   final nameController = TextEditingController();
   final radiusController = TextEditingController();
 
-  // Reactive variables for latitude and longitude
   final selectedLat = RxnDouble();
   final selectedLng = RxnDouble();
+  final isLocating = false.obs; // ✅ loading state for button
 
   Get.bottomSheet(
     SingleChildScrollView(
       child: Container(
         height: Get.height * 0.7,
-       
         decoration: const BoxDecoration(
           color: TheColors.bgColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -286,17 +280,16 @@ void showCreateBranchBottomSheet() {
         child: Form(
           key: formkey,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20,top: 14),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 14),
             child: Column(
               children: [
                 Container(
-                   margin: const EdgeInsets.only(bottom: 8),
-                          padding: const EdgeInsets.only(left: 14,right: 14,top: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: TheColors.orange, width: 0.4),
-              
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.only(left: 14, right: 14, top: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: TheColors.orange, width: 0.4),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -314,16 +307,11 @@ void showCreateBranchBottomSheet() {
                       Center(
                         child: Text(
                           "បង្កើតសាខាថ្មី",
-                          style: TextStyles.siemreap(
-                            context,
-                            fontSize: 18,
-                            fontweight: FontWeight.bold,
-                          ),
+                          style: TextStyles.siemreap(context, fontSize: 18, fontweight: FontWeight.bold),
                         ),
                       ),
                       const SizedBox(height: 10),
-                  
-                      // Branch name
+
                       Text("ឈ្មោះសាខា", style: TextStyles.siemreap(context, fontSize: 12)),
                       const SizedBox(height: 8),
                       CustomTextField(
@@ -333,13 +321,12 @@ void showCreateBranchBottomSheet() {
                         validator: (value) =>
                             value == null || value.isEmpty ? 'សូមបញ្ចូលឈ្មោះសាខា' : null,
                       ),
-                  
+
                       const SizedBox(height: 15),
-                  
-                      // Branch location
+
                       Text("ទីតាំងសាខា", style: TextStyles.siemreap(context, fontSize: 12)),
                       const SizedBox(height: 8),
-                  
+
                       Row(
                         children: [
                           Expanded(
@@ -348,36 +335,60 @@ void showCreateBranchBottomSheet() {
                                 (selectedLat.value != null && selectedLng.value != null)
                                     ? "Lat: ${selectedLat.value!.toStringAsFixed(5)}, Lng: ${selectedLng.value!.toStringAsFixed(5)}"
                                     : "មិនទាន់ជ្រើសទីតាំង",
-                                style: TextStyles.siemreap(
-                                  context,
-                                  fontSize: 12,
-                                  color: TheColors.gray,
-                                ),
+                                style: TextStyles.siemreap(context, fontSize: 12, color: TheColors.gray),
                               );
                             }),
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              final result = await Get.to(() => MapPickerView());
-                              if (result != null) {
-                                selectedLat.value = result['lat'];
-                                selectedLng.value = result['lng'];
-                              }
-                            },
-                            icon: const Icon(
-                              Icons.location_on,
-                              color: TheColors.secondaryColor,
-                              size: 30,
-                            ),
-                          ),
+
+                          // ✅ Just click → get location, no page navigation
+                          Obx(() => IconButton(
+                            onPressed: isLocating.value
+                                ? null // disable while loading
+                                : () async {
+                                    isLocating.value = true;
+
+                                    try {
+                                      LocationPermission permission = await Geolocator.checkPermission();
+                                      if (permission == LocationPermission.denied) {
+                                        permission = await Geolocator.requestPermission();
+                                        if (permission == LocationPermission.denied) {
+                                          Get.snackbar("ការព្រមាន", "សូមអនុញ្ញាតឱ្យកម្មវិធីប្រើទីតាំង។");
+                                          return;
+                                        }
+                                      }
+                                      if (permission == LocationPermission.deniedForever) {
+                                        Get.snackbar("បដិសេធ", "សូមបើកការអនុញ្ញាតទីតាំងក្នុងការកំណត់។");
+                                        return;
+                                      }
+
+                                      Position position = await Geolocator.getCurrentPosition(
+                                        desiredAccuracy: LocationAccuracy.high,
+                                      );
+
+                                      selectedLat.value = position.latitude;
+                                      selectedLng.value = position.longitude;
+                                    } finally {
+                                      isLocating.value = false;
+                                    }
+                                  },
+                            icon: Obx(() => isLocating.value
+                                ? const SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(
+                                    Icons.location_on,
+                                    color: TheColors.secondaryColor,
+                                    size: 30,
+                                  )),
+                          )),
                         ],
                       ),
-                  
+
                       const SizedBox(height: 15),
-                  
-                      // Radius
-                      Text("ចម្ថាយដែលអាចស្កែនបាន (m)",
-                          style: TextStyles.siemreap(context, fontSize: 12)),
+
+                      Text("ចម្ថាយដែលអាចស្កែនបាន (m)", style: TextStyles.siemreap(context, fontSize: 12)),
                       const SizedBox(height: 8),
                       CustomTextField(
                         controller: radiusController,
@@ -387,35 +398,28 @@ void showCreateBranchBottomSheet() {
                         validator: (value) =>
                             value == null || value.isEmpty ? 'សូមបញ្ចូល' : null,
                       ),
-                  
                       const SizedBox(height: 15),
-                  
-                      // Save button
-                 
                     ],
                   ),
                 ),
-                     CustomElevatedButton(
-                        text: "រក្សាទុក",
-                        onPressed: () async {
-                          final int? radius = int.tryParse(radiusController.text.trim());
-                          if (formkey.currentState!.validate()) {
-                            if (selectedLat.value == null || selectedLng.value == null) {
-                              Get.snackbar("កំហុស", "សូមជ្រើសទីតាំងសាខា");
-                              return;
-                            }
-                  
-                            await branchcontroller.createbranch(
-                              name: nameController.text.trim(),
-                              latitude: selectedLat.value!,
-                              longitude: selectedLng.value!,
-                              radius: radius!,
-                            );
-                  
-                           
-                          }
-                        },
-                      ),
+                CustomElevatedButton(
+                  text: "រក្សាទុក",
+                  onPressed: () async {
+                    final int? radius = int.tryParse(radiusController.text.trim());
+                    if (formkey.currentState!.validate()) {
+                      if (selectedLat.value == null || selectedLng.value == null) {
+                        Get.snackbar("កំហុស", "សូមជ្រើសទីតាំងសាខា");
+                        return;
+                      }
+                      await branchcontroller.createbranch(
+                        name: nameController.text.trim(),
+                        latitude: selectedLat.value!,
+                        longitude: selectedLng.value!,
+                        radius: radius!,
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),

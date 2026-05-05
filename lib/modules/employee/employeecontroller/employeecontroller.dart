@@ -158,7 +158,7 @@ class Employeecontroller extends GetxController {
       if (isupdated) {
        
         await fetchemployee();
-       
+        
       }
     } catch (e) {
       CustomSnackbar.error(title: "ខុសប្រក្រី".tr, message: "កែប្រែបរាជ័យ".tr);
