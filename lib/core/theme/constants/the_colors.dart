@@ -23,4 +23,5 @@ class TheColors{
   static const orange = Color(0xFF1b3351);
   static const red = Color.fromARGB(255, 255, 13, 0);
   static const yellow = Color(0xff1e2a81);
+   static const warningColorv2 = Color(0xFFF59E0B);
 }

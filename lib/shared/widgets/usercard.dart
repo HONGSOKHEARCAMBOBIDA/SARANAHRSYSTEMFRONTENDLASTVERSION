@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_10/core/theme/constants/the_colors.dart';
 import 'package:flutter_application_10/core/theme/custom_theme/text_styles.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 class CustomUserCard extends StatelessWidget {
+  final String phone;
   final String namekh;
   final String nameenglish;
   final String role;
@@ -16,6 +17,7 @@ class CustomUserCard extends StatelessWidget {
   
   const CustomUserCard({
     Key? key,
+    required this.phone,
     required this.namekh,
     required this.nameenglish,
     required this.role,
@@ -132,7 +134,7 @@ class CustomUserCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
                               color: TheColors.secondaryColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               branch,
@@ -143,6 +145,39 @@ class CustomUserCard extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 8),
+GestureDetector(
+  onTap: () async {
+    final phone = this.phone.replaceAll(RegExp(r'[^\d+]'), '');
+    final uri = Uri.parse('https://t.me/$phone');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  },
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+    decoration: BoxDecoration(
+      color: const Color(0xFF2AABEE).withOpacity(0.1), // Telegram blue
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.telegram, size: 14, color: Color(0xFF2AABEE)),
+        const SizedBox(width: 4),
+        Text(
+          phone,
+          style: GoogleFonts.siemreap(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF2AABEE),
+            letterSpacing: -0.3,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
                         ],
                       ),
                       const SizedBox(height: 6),
@@ -151,7 +186,7 @@ class CustomUserCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: TheColors.orange.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
                           role,

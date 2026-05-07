@@ -202,7 +202,10 @@ class CreateLeaveView extends StatelessWidget {
             startdate: start!.toIso8601String(), 
             enddate: end!.toIso8601String(), 
             leaveday: leave!, 
-            approvebyid: selectApproveById.value!);
+            approvebyid: selectApproveById.value!,
+            description: descriptioncontroller.text
+            );
+            Navigator.pop(context);
         
       },
       

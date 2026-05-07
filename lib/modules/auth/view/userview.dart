@@ -310,6 +310,7 @@ class _UserviewState extends State<Userview> {
       final user = authcontroller.users[index];
       return Center(
         child: CustomUserCard(
+  phone: user.contact!,
   namekh: user.name ?? "អត់មាន",
   role: user.roleName ?? "អត់មាន".tr,
   branch: user.branchName!,

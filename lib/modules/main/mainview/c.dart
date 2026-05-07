@@ -125,19 +125,19 @@ class _cState extends State<c> {
               },
             ),
 
-            ListTile(
-              leading: const Icon(
-                Icons.monetization_on_sharp,
-                color: TheColors.yellow,
-              ),
-              title: Text(
-                'របាយការណ៍បេីកប្រាក់ខែ',
-                style: TextStyles.siemreap(context, fontSize: 12),
-              ),
-              onTap: () {
-                Get.toNamed('/payrollview'); // Navigate to Register page
-              },
-            ),
+            // ListTile(
+            //   leading: const Icon(
+            //     Icons.monetization_on_sharp,
+            //     color: TheColors.yellow,
+            //   ),
+            //   title: Text(
+            //     'របាយការណ៍បេីកប្រាក់ខែ',
+            //     style: TextStyles.siemreap(context, fontSize: 12),
+            //   ),
+            //   onTap: () {
+            //     Get.toNamed('/payrollview'); // Navigate to Register page
+            //   },
+            // ),
 
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),

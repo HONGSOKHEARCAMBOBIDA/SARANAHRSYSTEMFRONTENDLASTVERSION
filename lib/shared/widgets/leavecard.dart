@@ -89,7 +89,7 @@ class LeaveCard extends StatelessWidget {
                     leaveData.employeeNameEnglish ?? 'Unknown Employee',
                     style: TextStyles.siemreap(
                       context,
-                      color: TheColors.warningColor,
+                      color: TheColors.successColor,
                       fontSize: 12,
                       fontweight: FontWeight.bold
                     ),
@@ -188,7 +188,7 @@ class LeaveCard extends StatelessWidget {
           _InfoChip1(
             icon: Icons.warning_amber_outlined,
             text: 'អត់ច្បាប់',
-            color: TheColors.orange,
+            color: TheColors.red,
           ),
         if (leaveData.isWeekend == 1)
           _InfoChip1(
@@ -216,19 +216,12 @@ class LeaveCard extends StatelessWidget {
         ),
         const Spacer(),
         if (leaveData.shiftName != null)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: TheColors.warningColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              leaveData.shiftName!,
-              style: GoogleFonts.siemreap(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: TheColors.bgColor,
-              ),
+          Text(
+            leaveData.shiftName!,
+            style: GoogleFonts.siemreap(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: TheColors.black,
             ),
           ),
       ],
@@ -291,7 +284,7 @@ class LeaveCard extends StatelessWidget {
   Color _getStatusColor(int? status) {
     switch (status) {
       case 1: // Approved
-        return TheColors.red;
+        return TheColors.warningColorv2;
       case 0: // Rejected
         return TheColors.successColor;
       case 2: // Pending

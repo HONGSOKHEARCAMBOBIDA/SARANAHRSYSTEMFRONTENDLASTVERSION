@@ -211,6 +211,7 @@ class UpdateLeaveView extends StatelessWidget {
             description: descriptioncontroller.text.trim(),
             approvebyid: selectApproveById.value!,
           );
+           Navigator.pop(context);
         },
       ),
     );
