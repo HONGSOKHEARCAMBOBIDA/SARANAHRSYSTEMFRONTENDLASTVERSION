@@ -153,7 +153,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
   Future<void> registerUser() async {
     final selectpartids = authcontroller.selectedPartIds.toList();
-    print(selectpartids);
+  
     if (_formkey.currentState!.validate()) {
       // Validate required fields for registration
       if (selectbranchid.value == null ||
@@ -163,9 +163,6 @@ class _RegisterUserViewState extends State<RegisterUserView> {
           selectroleid.value == null ||
           selecttype.value == null ||
           selecthiredate.value == null ||
-          usernameController.text.isEmpty ||
-          emailController.text.isEmpty ||
-          passwordController.text.isEmpty ||
           selectShiftId.value == null ||
           baseSalaryController.text.isEmpty ||
           workdayController.text.isEmpty) {
@@ -186,7 +183,6 @@ class _RegisterUserViewState extends State<RegisterUserView> {
       }
 
       try {
-        final year = int.tryParse(experienceyearcontroller.text) ?? 0;
         final salary = double.tryParse(baseSalaryController.text) ?? 0.0;
         final workDays = int.tryParse(workdayController.text) ?? 0;
 
@@ -194,9 +190,6 @@ class _RegisterUserViewState extends State<RegisterUserView> {
           branchID: selectbranchid.value!.toString(),
           nameEn: nameencontroller.text.trim(),
           nameKh: namekhcontroller.text.trim(),
-          username: usernameController.text.trim(),
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
           gender: selectgender.value!,
           contact: contactcontroller.text.trim(),
           nationalIdNumber: nationalidnumbercontroller.text.trim(),
@@ -215,7 +208,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
               selectvillageidofbirth.value!,
           familyPhone: familyphonecontroller.text,
           educationLevel: educationlevelcontroller.text,
-          experienceYears: year,
+          experienceYears: experienceyearcontroller.text,
           previousCompany: previouscompanycontroller.text,
           bankName: banknamecontroller.text,
           bankAccountNumber: bankaccountcontroller.text,
@@ -387,74 +380,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                       SizedBox(height: 20),
 
                       // Account Information Section
-                      Container(
-                                        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18,),
-          border: Border.all(color: TheColors.orange,width: 0.5)
-        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildHeader("ព័ត៌មានគណនី", Icons.lock_outline),
-                              SizedBox(height: 8),
-                              _buildLabel("ឈ្មោះអ្នកប្រើប្រាស់សម្រាប់ចូលប្រព័ន្ធ"),
-                              CustomTextField(
-                                controller: usernameController,
-                                hintText: "hong.sokhear",
-                                prefixIcon: Icons.person_outlined,
-                              ),
-                              SizedBox(height: 8),
-                              _buildLabel("អ៊ីមែល"),
-                              CustomTextField(
-                                controller: emailController,
-                                hintText: "example@company.com",
-                                prefixIcon: Icons.email_outlined,
-                                keyboardType: TextInputType.emailAddress,
-                              ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _buildLabel("លេខសំងាត់"),
-                                        CustomTextField(
-                                          controller: passwordController,
-                                          hintText: "********",
-                                          prefixIcon: Icons.lock_outlined,
-                                          obscureText: true,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _buildLabel("បញ្ជាក់លេខសំងាត់"),
-                                        CustomTextField(
-                                          controller: confirmPasswordController,
-                                          hintText: "********",
-                                          prefixIcon: Icons.lock_outlined,
-                                          obscureText: true,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: 15),
+           
 
                       // Personal Information Section
                       Container(
@@ -1197,45 +1123,38 @@ Obx(() {
                                 "ព័ត៌មានអប់រំ និងបទពិសោធន៍",
                                 Icons.school_outlined,
                               ),
-                              Row(
+                              Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _buildLabel("កម្រិតសិក្សា"),
-                                        CustomTextField(
-                                          controller: educationlevelcontroller,
-                                          hintText: "បរញ្ញាបត្រ",
-                                          prefixIcon: Icons.menu_book,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _buildLabel("បទពិសោធន៍គិតជាឆ្នាំ"),
-                                        CustomTextField(
-                                          controller: experienceyearcontroller,
-                                          hintText: "2",
-                                          prefixIcon: Icons.work_history,
-                                        ),
-                                      ],
-                                    ),
+                                  _buildLabel("កម្រិតសិក្សា"),
+                                  CustomTextField(
+                                    controller: educationlevelcontroller,
+                                    hintText: "បរញ្ញាបត្រ",
+                                    prefixIcon: Icons.menu_book,
                                   ),
                                 ],
                               ),
+                             
                               SizedBox(height: 8),
                               _buildLabel("ក្រុមហ៊ុនពីមុន"),
                               CustomTextField(
                                 controller: previouscompanycontroller,
                                 hintText: "ABA",
                                 prefixIcon: Icons.apartment,
+                              ),
+                               SizedBox(width: 5),
+                              Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  _buildLabel("រយ:ពេលបទពិសោធន៍"),
+                                  CustomTextField(
+                                    controller: experienceyearcontroller,
+                                    hintText: "2",
+                                    prefixIcon: Icons.work_history,
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 8),
                               _buildLabel("សម្គាល់"),
@@ -1775,6 +1694,7 @@ Obx(() {
                           ),
                         ),
                       ),
+                  
 
                       SizedBox(height: 20),
                     ],

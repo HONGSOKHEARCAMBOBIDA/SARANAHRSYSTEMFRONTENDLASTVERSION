@@ -12,6 +12,7 @@ import 'package:flutter_application_10/modules/branch/branchcontroller/branchcon
 import 'package:flutter_application_10/modules/role/rolecontroller/rolecontroller.dart';
 import 'package:flutter_application_10/shared/widgets/app_bar.dart';
 import 'package:flutter_application_10/shared/widgets/loading.dart';
+import 'package:flutter_application_10/shared/widgets/snackbar.dart';
 import 'package:flutter_application_10/shared/widgets/textfield.dart';
 import 'package:flutter_application_10/shared/widgets/usercard.dart';
 import 'package:flutter_application_10/shared/widgets/userdetailbuttonsheet.dart';
@@ -45,6 +46,101 @@ class _UserviewState extends State<Userview> {
       ),
     );
   }
+  void _showChangePasswordSheet(int userId) {
+  final TextEditingController newPassController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
+  final RxBool obscureNew = true.obs;
+  final RxBool obscureConfirm = true.obs;
+
+  Get.bottomSheet(
+    Container(
+      padding: const EdgeInsets.all(24),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'ដូរពាក្យសម្ងាត់',
+            style: GoogleFonts.siemreap(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Obx(() => TextField(
+            controller: newPassController,
+            obscureText: obscureNew.value,
+            decoration: InputDecoration(
+              labelText: 'ពាក្យសម្ងាត់ថ្មី',
+              labelStyle: GoogleFonts.siemreap(),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              suffixIcon: IconButton(
+                icon: Icon(obscureNew.value ? Icons.visibility_off : Icons.visibility),
+                onPressed: () => obscureNew.value = !obscureNew.value,
+              ),
+            ),
+          )),
+          const SizedBox(height: 12),
+          Obx(() => TextField(
+            controller: confirmPassController,
+            obscureText: obscureConfirm.value,
+            decoration: InputDecoration(
+              labelText: 'បញ្ជាក់ពាក្យសម្ងាត់',
+              labelStyle: GoogleFonts.siemreap(),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              suffixIcon: IconButton(
+                icon: Icon(obscureConfirm.value ? Icons.visibility_off : Icons.visibility),
+                onPressed: () => obscureConfirm.value = !obscureConfirm.value,
+              ),
+            ),
+          )),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: TheColors.errorColor,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                if (newPassController.text.isEmpty || confirmPassController.text.isEmpty) {
+                  CustomSnackbar.error(title: "បញ្ហា", message: "សូមបំពេញទាំងអស់");
+                  return;
+                }
+                if (newPassController.text != confirmPassController.text) {
+                  CustomSnackbar.error(title: "បញ្ហា", message: "ពាក្យសម្ងាត់មិនដូចគ្នា");
+                  return;
+                }
+               
+                authcontroller.changePassword(
+                  userId: userId,
+                  newPassword: newPassController.text.trim(),
+                );
+                Navigator.pop(context);
+              },
+              child: Text(
+                'រក្សាទុក',
+                style: GoogleFonts.siemreap(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
+      ),
+    ),
+    isScrollControlled: true,
+  );
+}
 
   Widget _buildlabel(String label) {
     return Padding(
@@ -214,25 +310,26 @@ class _UserviewState extends State<Userview> {
       final user = authcontroller.users[index];
       return Center(
         child: CustomUserCard(
-          namekh: user.name ?? "អត់មាន",
-          role: user.roleName ?? "អត់មាន".tr,
-          branch: user.branchName!,
-          nameenglish: user.nameEn ?? "",
-          isActive: user.isActive,
-          onEdit: () {
-            Get.to(
-              () => Updateuserview(userModel: user),
-              transition: Transition.rightToLeft,
-              binding: UpdateUserBindings(),
-            );
-          },
-          onDelete: () {
-            authcontroller.changestatususer(user.id!);
-          },
-          onTap: () {
-            _handleViewUser(user);
-          },
-        ),
+  namekh: user.name ?? "អត់មាន",
+  role: user.roleName ?? "អត់មាន".tr,
+  branch: user.branchName!,
+  nameenglish: user.nameEn ?? "",
+  isActive: user.isActive,
+  onEdit: () {
+    Get.to(
+      () => Updateuserview(userModel: user),
+      transition: Transition.rightToLeft,
+      binding: UpdateUserBindings(),
+    );
+  },
+  onDelete: () {
+    authcontroller.changestatususer(user.id!);
+  },
+  onTap: () {
+    _handleViewUser(user);
+  },
+  onChangePassword: () => _showChangePasswordSheet(user.id!), // 👈 add this
+),
       );
     },
     childCount: authcontroller.users.length,

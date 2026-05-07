@@ -11,8 +11,9 @@ class CustomUserCard extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback onTap;
+  final VoidCallback onChangePassword;
   final bool? isActive;
-
+  
   const CustomUserCard({
     Key? key,
     required this.namekh,
@@ -22,6 +23,7 @@ class CustomUserCard extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
     required this.onTap,
+    required this.onChangePassword,
     this.isActive,
   }) : super(key: key);
 
@@ -214,7 +216,9 @@ class CustomUserCard extends StatelessWidget {
             onEdit();
           } else if (value == 'delete') {
             onDelete();
-          }
+          } else if (value == 'changepassword') { 
+    onChangePassword();
+  }
         },
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -270,6 +274,33 @@ class CustomUserCard extends StatelessWidget {
                     color: isActive == true
                         ? TheColors.errorColor
                         : TheColors.successColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+       PopupMenuItem(
+            value: 'changepassword',
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: TheColors.lightOrage,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    Icons.lock,
+                  
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'ដូរពាក្យសម្ងាត់',
+                  style: GoogleFonts.siemreap(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

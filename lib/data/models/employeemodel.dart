@@ -50,7 +50,7 @@ class Data {
   String? provinceNameCurrentAddress;
   String? familyPhone;
   String? educationLevel;
-  int? experienceYears;
+  String? experienceYears;
   String? previousCompany;
   String? bankName;
   String? bankAccountNumber;

@@ -13,6 +13,29 @@ import 'package:flutter_application_10/shared/widgets/snackbar.dart';
 
 class Authservice {
   final ApiProvider apiProvider = ApiProvider();
+
+  Future<bool> changePassword({
+  required int userId,
+  required String newPassword,
+}) async {
+  try {
+    final body = {'new_password': newPassword};
+
+    final response = await apiProvider.put(
+      'changepassword/$userId',
+      body,
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return true;
+    } else {
+     
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
   Future<List<Data>> getuser({
     int? branchid,
     int? roleid,
@@ -92,9 +115,6 @@ class Authservice {
     required String branchID,
     required String nameEn,
     required String nameKh,
-    required String username,
-    required String email,
-    required String password,
     required int gender,
     required String contact,
     required String nationalIdNumber,
@@ -111,7 +131,7 @@ class Authservice {
     required int villageIdcurrentaddress,
     required String familyPhone,
     required String educationLevel,
-    required int experienceYears,
+    required String experienceYears,
     required String previousCompany,
     required String bankName,
     required String bankAccountNumber,
@@ -128,9 +148,6 @@ class Authservice {
         'name_en': nameEn,
         'name_kh': nameKh,
         'gender': gender,
-        'username': username,
-        'email': email,
-        'password': password,
         'shift_id': shiftID,
         'base_salary': baseSalary,
         'worked_day': workday,

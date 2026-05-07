@@ -209,6 +209,7 @@ shiftcontroller.fetchshift(selectbranchid.value);
                                 salaryid: widget.salaryID!,
                                 employeeshiftid: widget.employeeShiftId!,
                               );
+                              Navigator.pop(context);
                             },
                           ),
             ],

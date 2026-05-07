@@ -197,6 +197,7 @@ class _EditSalaryViewState extends State<EditSalaryView> {
                       workday: workDays,
                       salaryID: widget.salaryID,
                     );
+                    Navigator.pop(context);
                   },
                 ),
               ],

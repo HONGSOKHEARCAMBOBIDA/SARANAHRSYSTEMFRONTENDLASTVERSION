@@ -117,15 +117,14 @@ void showUpdateBranchBottomSheet(Data branch) {
   final nameController = TextEditingController(text: branch.name);
   final radiusController = TextEditingController(text: branch.radius?.toString() ?? '');
 
-  // Use RxDouble instead of RxnDouble for better reactivity
   final selectedLat = (branch.latitude ?? 0.0).obs;
   final selectedLng = (branch.longitude ?? 0.0).obs;
+  final isLocating = false.obs; // ✅ Add this
 
   Get.bottomSheet(
     SingleChildScrollView(
       child: Container(
         height: Get.height * 0.7,
-     
         decoration: const BoxDecoration(
           color: TheColors.bgColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -133,17 +132,16 @@ void showUpdateBranchBottomSheet(Data branch) {
         child: Form(
           key: formkey,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20,top: 13),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 13),
             child: Column(
               children: [
                 Container(
-                   margin: const EdgeInsets.only(bottom: 8),
-                        padding: const EdgeInsets.only(left: 14,right: 14,top: 8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: TheColors.orange, width: 0.4),
-            
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.only(left: 14, right: 14, top: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: TheColors.orange, width: 0.4),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -161,21 +159,18 @@ void showUpdateBranchBottomSheet(Data branch) {
                       Center(
                         child: Text(
                           "កែប្រែសាខា",
-                          style: TextStyles.siemreap(
-                            context,
-                            fontSize: 18,
-                            fontweight: FontWeight.bold,
-                          ),
+                          style: TextStyles.siemreap(context, fontSize: 18, fontweight: FontWeight.bold),
                         ),
                       ),
-                      const SizedBox(height:10),
+                      const SizedBox(height: 10),
                       Text("ឈ្មោះសាខា", style: TextStyles.siemreap(context, fontSize: 12)),
                       const SizedBox(height: 8),
                       CustomTextField(
                         controller: nameController,
                         prefixIcon: Icons.business,
                         hintText: "ឈ្មោះសាខា (ឧទាហរណ៍៖ សាខា Toul Kork)",
-                        validator: (value) => value == null || value.isEmpty ? 'សូមបញ្ចូលឈ្មោះសាខា' : null,
+                        validator: (value) =>
+                            value == null || value.isEmpty ? 'សូមបញ្ចូលឈ្មោះសាខា' : null,
                       ),
                       const SizedBox(height: 15),
                       Text("ទីតាំងសាខា", style: TextStyles.siemreap(context, fontSize: 12)),
@@ -192,21 +187,49 @@ void showUpdateBranchBottomSheet(Data branch) {
                               );
                             }),
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              final result = await Get.to(() => MapPickerView());
-                              if (result != null) {
-                                selectedLat.value = result['lat'];
-                                selectedLng.value = result['lng'];
-                                print("Updated location: ${selectedLat.value}, ${selectedLng.value}"); // Debug print
-                              }
-                            },
-                            icon: const Icon(
-                              Icons.location_on,
-                              color: TheColors.secondaryColor,
-                              size: 30,
-                            ),
-                          ),
+                          // ✅ Replaced MapPickerView with Geolocator logic
+                          Obx(() => IconButton(
+                            onPressed: isLocating.value
+                                ? null
+                                : () async {
+                                    isLocating.value = true;
+                                    try {
+                                      LocationPermission permission =
+                                          await Geolocator.checkPermission();
+                                      if (permission == LocationPermission.denied) {
+                                        permission = await Geolocator.requestPermission();
+                                        if (permission == LocationPermission.denied) {
+                                          Get.snackbar("ការព្រមាន", "សូមអនុញ្ញាតឱ្យកម្មវិធីប្រើទីតាំង។");
+                                          return;
+                                        }
+                                      }
+                                      if (permission == LocationPermission.deniedForever) {
+                                        Get.snackbar("បដិសេធ", "សូមបើកការអនុញ្ញាតទីតាំងក្នុងការកំណត់។");
+                                        return;
+                                      }
+
+                                      Position position = await Geolocator.getCurrentPosition(
+                                        desiredAccuracy: LocationAccuracy.high,
+                                      );
+
+                                      selectedLat.value = position.latitude;
+                                      selectedLng.value = position.longitude;
+                                    } finally {
+                                      isLocating.value = false;
+                                    }
+                                  },
+                            icon: Obx(() => isLocating.value
+                                ? const SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(
+                                    Icons.location_on,
+                                    color: TheColors.secondaryColor,
+                                    size: 30,
+                                  )),
+                          )),
                         ],
                       ),
                       const SizedBox(height: 15),
@@ -217,40 +240,37 @@ void showUpdateBranchBottomSheet(Data branch) {
                         prefixIcon: Icons.circle_outlined,
                         hintText: "សូមបញ្ចូលចម្ថាយដែលអាចស្កែនបាន (ឧទាហរណ៍៖ 20)",
                         keyboardType: TextInputType.number,
-                        validator: (value) => value == null || value.isEmpty ? 'សូមបញ្ចូល' : null,
+                        validator: (value) =>
+                            value == null || value.isEmpty ? 'សូមបញ្ចូល' : null,
                       ),
                       const SizedBox(height: 15),
-                
                     ],
                   ),
                 ),
-                      CustomElevatedButton(
-                        text: "រក្សាទុក",
-                        onPressed: () async {
-                          final double? radius = double.tryParse(radiusController.text.trim());
-                          if (formkey.currentState!.validate()) {
-                            if (selectedLat.value == 0.0 || selectedLng.value == 0.0) {
-                              Get.snackbar("កំហុស", "សូមជ្រើសទីតាំងសាខា");
-                              return;
-                            }
-                  
-                            if (radius == null) {
-                              Get.snackbar("កំហុស", "សូមបញ្ចូលចម្ងាយដែលត្រឹមត្រូវ");
-                              return;
-                            }
-                  
-                            await branchcontroller.updatebranch(
-                              branchid: branch.id!,
-                              name: nameController.text,
-                              latitude: selectedLat.value,
-                              longitude: selectedLng.value,
-                              radius: radius,
-                            );
-                  
-                        
-                          }
-                        },
-                      ),
+                CustomElevatedButton(
+                  text: "រក្សាទុក",
+                  onPressed: () async {
+                    final double? radius = double.tryParse(radiusController.text.trim());
+                    if (formkey.currentState!.validate()) {
+                      if (selectedLat.value == 0.0 || selectedLng.value == 0.0) {
+                        Get.snackbar("កំហុស", "សូមជ្រើសទីតាំងសាខា");
+                        return;
+                      }
+                      if (radius == null) {
+                        Get.snackbar("កំហុស", "សូមបញ្ចូលចម្ងាយដែលត្រឹមត្រូវ");
+                        return;
+                      }
+                      await branchcontroller.updatebranch(
+                        branchid: branch.id!,
+                        name: nameController.text,
+                        latitude: selectedLat.value,
+                        longitude: selectedLng.value,
+                        radius: radius,
+                      );
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -417,6 +437,7 @@ void showCreateBranchBottomSheet() {
                         longitude: selectedLng.value!,
                         radius: radius!,
                       );
+                       Navigator.pop(context);
                     }
                   },
                 ),

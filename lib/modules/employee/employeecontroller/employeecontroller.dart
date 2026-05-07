@@ -119,7 +119,7 @@ class Employeecontroller extends GetxController {
     required int villageIdcurrentaddress,//
     required String familyPhone,//
     required String educationLevel,//
-    required int experienceYears,//
+    required String experienceYears,//
     required String previousCompany,
     required String bankName,
     required String bankAccountNumber,
@@ -211,13 +211,7 @@ class Employeecontroller extends GetxController {
       );
 
       if (update) {
-        // ✅ Refresh employee list
         await fetchemployee();
-        Get.back();
-
-        // ✅ Close bottom sheet after a short delay
-
-        // 👈 Close the bottom sheet
       }
     } catch (e) {
       CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());

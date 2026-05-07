@@ -1,3 +1,3 @@
 class Appconstants {
-  static const String baseUrl = "https://tp4jp1v0-8080.asse.devtunnels.ms";
+  static const String baseUrl = "https://7ml45f42-8080.asse.devtunnels.ms";
 }

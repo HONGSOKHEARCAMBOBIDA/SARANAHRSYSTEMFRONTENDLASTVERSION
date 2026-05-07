@@ -77,7 +77,7 @@ class Employeeservice {
     required int villageIdcurrentaddress,
     required String familyPhone,
     required String educationLevel,
-    required int experienceYears,
+    required String experienceYears,
     required String previousCompany,
     required String bankName,
     required String bankAccountNumber,

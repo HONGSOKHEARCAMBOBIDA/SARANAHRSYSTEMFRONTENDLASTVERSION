@@ -318,15 +318,27 @@ class _ShiftviewState extends State<Shiftview> {
                             end_time: formatTime(selectedEndTime.value!),
                             branchid: selectbranchid.value!,
                           );
+                            Navigator.pop(context);
                         },
-                        child: Text(
-                          "រក្សាទុក",
-                          style: TextStyles.siemreap(
-                            context,
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: Obx(() {
+                          return shiftcontroller.isLoading.value
+                              ? const SizedBox(
+  width: 20,
+  height: 20,
+  child: CircularProgressIndicator(
+    color: Colors.white,
+    strokeWidth: 2,
+  ),
+)
+                              : Text(
+                                  "រក្សាទុក",
+                                  style: TextStyles.siemreap(
+                                    context,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                );
+                        }),
                       ),
               ],
             ),
@@ -343,25 +355,25 @@ class _ShiftviewState extends State<Shiftview> {
     final selectedEndTime = Rxn<TimeOfDay>();
 
     // Parse existing times if available
-    if (shift.startTime != null && shift.startTime!.isNotEmpty) {
-      final parts = shift.startTime!.split(':');
-      if (parts.length == 2) {
-        selectedStartTime.value = TimeOfDay(
-          hour: int.parse(parts[0]),
-          minute: int.parse(parts[1]),
-        );
-      }
-    }
+if (shift.startTime != null && shift.startTime!.isNotEmpty) {
+  final parts = shift.startTime!.trim().split(':');
+  if (parts.length >= 2) {  // ✅ >= 2 handles both "HH:mm" and "HH:mm:ss"
+    selectedStartTime.value = TimeOfDay(
+      hour: int.tryParse(parts[0]) ?? 0,
+      minute: int.tryParse(parts[1]) ?? 0,
+    );
+  }
+}
 
-    if (shift.endTime != null && shift.endTime!.isNotEmpty) {
-      final parts = shift.endTime!.split(':');
-      if (parts.length == 2) {
-        selectedEndTime.value = TimeOfDay(
-          hour: int.parse(parts[0]),
-          minute: int.parse(parts[1]),
-        );
-      }
-    }
+if (shift.endTime != null && shift.endTime!.isNotEmpty) {
+  final parts = shift.endTime!.trim().split(':');
+  if (parts.length >= 2) {  // ✅ >= 2 handles both "HH:mm" and "HH:mm:ss"
+    selectedEndTime.value = TimeOfDay(
+      hour: int.tryParse(parts[0]) ?? 0,
+      minute: int.tryParse(parts[1]) ?? 0,
+    );
+  }
+}
 
     Get.bottomSheet(
       SingleChildScrollView(
@@ -540,10 +552,18 @@ class _ShiftviewState extends State<Shiftview> {
                             end_time: formatTime(selectedEndTime.value!),
                             branchid: selectbranchid.value!,
                           );
+                          Navigator.pop(context);
                         },
                         child: Obx(() {
                           return shiftcontroller.isLoading.value
-                              ? const CircularProgressIndicator(color: Colors.white)
+                              ? const SizedBox(
+  width: 20,
+  height: 20,
+  child: CircularProgressIndicator(
+    color: Colors.white,
+    strokeWidth: 2,
+  ),
+)
                               : Text(
                                   "ធ្វើបច្ចុប្បន្នភាព",
                                   style: TextStyles.siemreap(

@@ -155,7 +155,7 @@ class _EmployeedetailbuttonsheetState extends State<Employeedetailbuttonsheet> {
                     title: 'ព័ត៌មានអប់រំ និងបទពិសោធន៍',
                     children: [
                       _buildDetailItem('កម្រិតវប្បធម៌', widget.employee.educationLevel ?? 'N/A'),
-                      _buildDetailItem('ឆ្នាំបទពិសោធន៍', widget.employee.experienceYears?.toString() ?? 'N/A'),
+                      _buildDetailItem('ឆ្នាំបទពិសោធន៍', widget.employee.experienceYears ?? 'N/A'),
                       _buildDetailItem('ក្រុមហ៊ុនពីមុន', widget.employee.previousCompany ?? 'N/A'),
                     ],
                   ),

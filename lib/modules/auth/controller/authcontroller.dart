@@ -44,6 +44,29 @@ class Authcontroller extends GetxController {
     update();
 }
 
+Future<void> changePassword({
+  required int userId,
+  required String newPassword,
+}) async {
+  try {
+    isLoading.value = true;
+    bool isChanged = await authservice.changePassword(
+      userId: userId,
+      newPassword: newPassword,
+    );
+    if (isChanged) {
+      CustomSnackbar.success(
+        title: "ជោគជ័យ",
+        message: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរ",
+      );
+      
+    }
+  } catch (e) {
+    CustomSnackbar.error(title: "មានបញ្ហា", message: e.toString());
+  } finally {
+    isLoading.value = false;
+  }
+}
 
   Future<File?> pickProfile() async {
     final XFile? pickedFile = await imagepicker.pickImage(
@@ -158,9 +181,6 @@ class Authcontroller extends GetxController {
     required String branchID,
     required String nameEn,
     required String nameKh,
-    required String username,
-    required String email,
-    required String password,
     required int gender,
     required String contact,
     required String nationalIdNumber,
@@ -177,7 +197,7 @@ class Authcontroller extends GetxController {
     required int villageIdcurrentaddress,
     required String familyPhone,
     required String educationLevel,
-    required int experienceYears,
+    required String experienceYears,
     required String previousCompany,
     required String bankName,
     required String bankAccountNumber,
@@ -194,9 +214,6 @@ class Authcontroller extends GetxController {
         branchID: branchID,
         nameEn: nameEn,
         nameKh: nameKh,
-        username: username,
-        email: email,
-        password: password,
         gender: gender,
         contact: contact,
         nationalIdNumber: nationalIdNumber,

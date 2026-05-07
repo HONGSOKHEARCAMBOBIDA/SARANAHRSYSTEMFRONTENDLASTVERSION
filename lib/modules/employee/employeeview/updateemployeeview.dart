@@ -300,7 +300,7 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
           villageIdcurrentaddress: selectvillageidofcurrenctadrress.value!,
           familyPhone: familyphonecontroller.text,
           educationLevel: educationlevelcontroller.text,
-          experienceYears: year!,
+          experienceYears: experienceyearcontroller.text,
           previousCompany: previouscompanycontroller.text,
           bankName: banknamecontroller.text,
           bankAccountNumber: bankaccountcontroller.text,
@@ -1108,41 +1108,20 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                           children: [
                             _buildHeader("ព័ត៌មានអប់រំ និងបទពិសោធន៍",Icons.school_outlined),
 
-                            Row(
+                            Column(
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      _buildLabel("កម្រិតសិក្សា"),
-                                      CustomTextField(
-                                      
-                                        controller: educationlevelcontroller,
-                                        hintText: "បរញ្ញាបត្រ",
-                                        prefixIcon: Icons.menu_book,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width: 5),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      _buildLabel("បទពិសោធន៍"),
-                                      CustomTextField(
-                                       
-                                        controller: experienceyearcontroller,
-                                        hintText: "2",
-                                        prefixIcon: Icons.work_history,
-                                      ),
-                                    ],
-                                  ),
+                                _buildLabel("កម្រិតសិក្សា"),
+                                CustomTextField(
+                                
+                                  controller: educationlevelcontroller,
+                                  hintText: "បរញ្ញាបត្រ",
+                                  prefixIcon: Icons.menu_book,
                                 ),
                               ],
                             ),
+                           
                             SizedBox(height: 8),
                             _buildLabel("ក្រុមហ៊ុនពីមុន"),
                             CustomTextField(
@@ -1150,6 +1129,20 @@ class _UpdateemployeeviewState extends State<Updateemployeeview> {
                               controller: previouscompanycontroller,
                               hintText: "ABA",
                               prefixIcon: Icons.apartment,
+                            ),
+                             SizedBox(width: 5),
+                            Column(
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                              children: [
+                                _buildLabel("បទពិសោធន៍"),
+                                CustomTextField(
+                                 
+                                  controller: experienceyearcontroller,
+                                  hintText: "2",
+                                  prefixIcon: Icons.work_history,
+                                ),
+                              ],
                             ),
                             SizedBox(height: 8,),
                             _buildLabel("សម្គាល់"),

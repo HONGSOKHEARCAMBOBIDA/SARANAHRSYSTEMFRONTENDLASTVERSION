@@ -134,6 +134,7 @@ void _initializeData() {
                          
                           employeeshiftid: widget.employeeShiftId,
                         );
+                        Navigator.pop(context);
                         
                       
                       },
